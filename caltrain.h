@@ -6,6 +6,9 @@ struct station {
 	int number_of_passengers_walking_in_the_train;
 
 	pthread_mutex_t mutex;
+	
+	pthread_cond_t cond_train_is_ready_to_move;
+	pthread_cond_t cond_train_arrived_with_at_least_one_empty_seat;
 };
 
 void station_init(struct station *station);
