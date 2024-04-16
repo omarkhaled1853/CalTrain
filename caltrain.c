@@ -58,12 +58,12 @@ station_on_board(struct station *station)
 	// lock
 	pthread_mutex_lock(&station->mutex);
 	station->number_of_passengers_walking_in_the_train--;
+	// unlock
+	pthread_mutex_unlock(&station->mutex);
 	// if(full train) -> move
 	if(station->number_of_passengers_walking_in_the_train == 0){
 		if(station->number_of_empty_seats == 0 || station->number_of_waitting_passengers == 0){
 			pthread_cond_signal(&station->cond_train_is_ready_to_move);
 		}
 	}
-	// unlock
-	pthread_mutex_unlock(&station->mutex);
 }
